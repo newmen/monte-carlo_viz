@@ -4,12 +4,13 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QLabel>
+#include <QTextEdit>
 #include <QTimer>
 #include "playbutton.h"
 #include "renderarea_context.h"
 
-#include "../../src/contexts/basereactor_context.h"
-#include "../../src/contexts/basesimulation_context.h"
+#include "../../src/contexts/readevent_context.h"
+#include "../../src/datas/area_data.h"
 
 class MainWindowContext : public QWidget
 {
@@ -18,30 +19,44 @@ public:
     MainWindowContext();
     ~MainWindowContext();
     
-//signals:
-//public slots:
 private slots:
     void doReaction();
 
     void playAnimation();
     void stopAnimation();
 
-private:
-    void updateCell(const CellData *cell);
-    void updateStatusBar();
+    void openFile();
+    void openDirectory();
+    void updateSideLength();
+
+    void saveSnapShot();
 
 private:
-    AreaData _area;
-    BaseReactorContext *_reactor;
-    BaseSimulationContext *_simulationContext;
+    void updateCell(CellType value, CoordType x, CoordType y);
+    void updateStatusBar();
+
+
+private:
+    QString _snapShotsPath;
+    double _everySecond;
+    double _secondsCounter;
+
+    AreaData *_area;
+    ReadEventContext *_readContext;
     RenderAreaContext *_renderArea;
     float _cellSideLength;
+
+    QPushButton *_loadButton;
+    QPushButton *_selectDirButton;
+    QLabel *_selectDirLabel;
+    QLabel *_sideLengthLabel;
+    QTextEdit *_sideLengthText;
 
     QPushButton *_doButton;
     PlayButton *_playButton;
     QTimer *_animationTimer;
 
-    long double _totalTime;
+    double _totalTime;
     QLabel *_totalTimeTextLabel;
     QLabel *_totalTimeValueLabel;
     QLabel *_timeDimLabel;

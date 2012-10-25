@@ -9,14 +9,19 @@ class RenderAreaContext : public QWidget
 {
     Q_OBJECT
 public:
-    explicit RenderAreaContext(const AreaData *area, float cellSideLength, bool needBorder);
+    RenderAreaContext(const AreaData *area, float cellSideLength, bool needBorder);
+
+    void resetArea(const AreaData *area);
+    void resetSideLength(float cellSideLength);
 
 protected:
     void paintEvent(QPaintEvent *event);
     
 private:
+    void processSize();
+
     const AreaData *_area;
-    const float _cellSideLength;
+    float _cellSideLength;
     bool _needBorder;
 };
 

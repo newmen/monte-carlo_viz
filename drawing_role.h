@@ -19,7 +19,7 @@ private:
 
 template <class AData>
 void DrawingRole<AData>::draw(QPainter *painter, float cellSideLength) const {
-    this->eachCell([this, &painter, cellSideLength](int *const value, int x, int y) {
+    this->eachCell([this, &painter, cellSideLength](CellType *const value, CoordType x, CoordType y) {
         this->drawCell(painter, *value, x, y, cellSideLength);
     });
 }

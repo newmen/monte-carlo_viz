@@ -5,7 +5,17 @@
 RenderAreaContext::RenderAreaContext(const AreaData *area, float cellSideLength, bool needBorder) :
     _area(area), _cellSideLength(cellSideLength), _needBorder(needBorder)
 {
-    setMinimumSize(_cellSideLength * _area->sizeX(), _cellSideLength * _area->sizeY());
+    processSize();
+}
+
+void RenderAreaContext::resetArea(const AreaData *area) {
+    _area = area;
+    processSize();
+}
+
+void RenderAreaContext::resetSideLength(float cellSideLength) {
+    _cellSideLength = cellSideLength;
+    processSize();
 }
 
 void RenderAreaContext::paintEvent(QPaintEvent *event) {
@@ -25,4 +35,8 @@ void RenderAreaContext::paintEvent(QPaintEvent *event) {
     }
 
     painter.setRenderHint(QPainter::Antialiasing, false);
+}
+
+void RenderAreaContext::processSize() {
+    setMinimumSize(_cellSideLength * _area->sizeX(), _cellSideLength * _area->sizeY());
 }
