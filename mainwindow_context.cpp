@@ -2,7 +2,7 @@
 #include "mainwindow_context.h"
 
 MainWindowContext::MainWindowContext() : _snapShotsPath(""), _everySecond(0.05), _secondsCounter(0),
-    _readContext(0), _renderArea(0), _cellSideLength(3), _totalTime(0)
+    _readContext(0), _renderArea(0), _cellSideLength(1), _totalTime(0)
 {
     setWindowTitle("Monte Carlo simulation");
     QVBoxLayout *layout = new QVBoxLayout;
@@ -73,26 +73,17 @@ MainWindowContext::~MainWindowContext() {
 }
 
 void MainWindowContext::doReaction() {
-    if (_readContext == 0) return;
-    EventRecordData eRecord = _readContext->restoreEvent();
+    double currentTime = _readContext->setShotToArea(_area);
 
-    _totalTime += eRecord.dt();
-    updateStatusBar();
-    if (eRecord.nothing()) {
-        if (_playButton->started()) _playButton->click();
-    } else if (eRecord.isCell()) {
-        updateCell(eRecord.first(), eRecord.x(), eRecord.y());
-    } else if (eRecord.isHorizontalDimer()) {
-        updateCell(eRecord.first(), eRecord.x(), eRecord.y());
-        updateCell(eRecord.second(), eRecord.x() + 1, eRecord.y());
+    qDebug() << currentTime;
+
+    if (currentTime < 0) {
+        _playButton->click();
     } else {
-        updateCell(eRecord.first(), eRecord.x(), eRecord.y());
-        updateCell(eRecord.second(), eRecord.x(), eRecord.y() + 1);
-    }
+        _totalTime = currentTime;
+        updateStatusBar();
 
-    _secondsCounter += eRecord.dt();
-    if (_secondsCounter > _everySecond) {
-        _secondsCounter = 0;
+        _renderArea->update();
         saveSnapShot();
     }
 }
@@ -105,12 +96,12 @@ void MainWindowContext::stopAnimation() {
     _animationTimer->stop();
 }
 
-void MainWindowContext::updateCell(CellType value, CoordType x, CoordType y) {
-    CoordType cx = (x == _area->sizeX()) ? 0 : x;
-    CoordType cy = (y == _area->sizeY()) ? 0 : y;
-    _area->setValue(value, cx, cy);
-    _renderArea->update(cx * _cellSideLength, cy * _cellSideLength, _cellSideLength, _cellSideLength);
-}
+//void MainWindowContext::updateCell(CellType value, CoordType x, CoordType y) {
+//    CoordType cx = (x == _area->sizeX()) ? 0 : x;
+//    CoordType cy = (y == _area->sizeY()) ? 0 : y;
+//    _area->setValue(value, cx, cy);
+//    _renderArea->update(cx * _cellSideLength, cy * _cellSideLength, _cellSideLength, _cellSideLength);
+//}
 
 void MainWindowContext::updateStatusBar() {
     QString totalTimeText;
@@ -124,13 +115,13 @@ void MainWindowContext::openFile() {
     QString fileName = QFileDialog::getOpenFileName(this,
                                                     tr("Open Monte Carlo data file"),
                                                     tr("~/"),
-                                                    tr("MC Data Files (*.mcd);;All Files (*)"),
+                                                    tr("MC Shot Files (*.mcs);;All Files (*)"),
                                                     &selectedFilter,
                                                     options);
     if (fileName.isEmpty()) return;
 
     if (_readContext != 0) delete _readContext;
-    _readContext = new ReadEventContext(fileName.toStdString());
+    _readContext = new ReadShotContext(fileName.toStdString());
 
     Point2D sizes = _readContext->areaSizes();
     delete _area;
@@ -163,9 +154,9 @@ void MainWindowContext::saveSnapShot() {
     if (_snapShotsPath == "") return;
 
     QPixmap pixmap = QPixmap::grabWidget(_renderArea);
-//    pixmap.fill();
+//    QPixmap pixmap = QPixmap::grabWidget(_renderArea, 0, 0,
+//                                         _area->sizeX() * _cellSideLength, _area->sizeY() * _cellSideLength);
     QString out = _snapShotsPath + QString('/') + QString::number(_totalTime) + QString(".png");
-//    QString out = QString::number(_totalTime) + QString(".png");
     if (pixmap.save(out)) {
         qDebug() << out;
     } else {

@@ -25,14 +25,14 @@ void RenderAreaContext::paintEvent(QPaintEvent *event) {
 
     painter.setRenderHint(QPainter::Antialiasing, true);
 
-    const QRect &r = event->rect();
+//    const QRect &r = event->rect();
 
-    // lol condition xD
-    if (r.width() == _cellSideLength || r.height() == _cellSideLength) {
-        static_cast<const DrawingRole<AreaData> *>(_area)->redrawRegion(&painter, r, _cellSideLength);
-    } else {
+//    // lol condition xD
+//    if (r.width() == _cellSideLength || r.height() == _cellSideLength) {
+//        static_cast<const DrawingRole<AreaData> *>(_area)->redrawRegion(&painter, r, _cellSideLength);
+//    } else {
         static_cast<const DrawingRole<AreaData> *>(_area)->draw(&painter, _cellSideLength);
-    }
+//    }
 
     painter.setRenderHint(QPainter::Antialiasing, false);
 }

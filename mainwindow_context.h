@@ -9,7 +9,7 @@
 #include "playbutton.h"
 #include "renderarea_context.h"
 
-#include "../../src/contexts/readevent_context.h"
+#include "../../src/contexts/readshot_context.h"
 #include "../../src/datas/area_data.h"
 
 class MainWindowContext : public QWidget
@@ -32,9 +32,8 @@ private slots:
     void saveSnapShot();
 
 private:
-    void updateCell(CellType value, CoordType x, CoordType y);
+//    void updateCell(CellType value, CoordType x, CoordType y);
     void updateStatusBar();
-
 
 private:
     QString _snapShotsPath;
@@ -42,7 +41,7 @@ private:
     double _secondsCounter;
 
     AreaData *_area;
-    ReadEventContext *_readContext;
+    ReadShotContext *_readContext;
     RenderAreaContext *_renderArea;
     float _cellSideLength;
 
