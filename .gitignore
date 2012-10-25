@@ -1,0 +1,30 @@
+*_Qt_SDK_*
+
+*.pro.user*
+*~
+*.autosave
+
+*.dot
+*.png
+*.mcr
+*.prf
+
+*.gch
+*.d
+
+uses/test/test_mc
+uses/test/heap_test
+uses/test/*results*
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+*.so
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
