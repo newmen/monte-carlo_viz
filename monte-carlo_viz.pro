@@ -15,7 +15,7 @@ HEADERS += \
     playbutton.h \
     drawing_role.h
 
-unix:!macx:!symbian: LIBS += -L$$PWD/../../lib/ -lmonte_carlo
+unix:!macx:!symbian: LIBS += -L$$PWD/../monte_carlo_techs/lib/ -lmonte_carlo
 
-INCLUDEPATH += $$PWD/../../lib/
-DEPENDPATH += $$PWD/../../lib/
+INCLUDEPATH += $$PWD/../monte_carlo_techs/lib/
+DEPENDPATH += $$PWD/../monte_carlo_techs/lib/

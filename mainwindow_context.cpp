@@ -1,17 +1,17 @@
 #include <QtGui>
 #include "mainwindow_context.h"
 
-#include "../../src/contexts/abcdcellreactor_context.h"
-#include "../../src/contexts/abcddimerreactor_context.h"
-#include "../../src/contexts/nocoreactor_context.h"
-#include "../../src/contexts/lotkareactor_context.h"
-#include "../../src/contexts/lotkathreereactor_context.h"
+#include "../monte_carlo_techs/src/contexts/abcdcellreactor_context.h"
+#include "../monte_carlo_techs/src/contexts/abcddimerreactor_context.h"
+#include "../monte_carlo_techs/src/contexts/nocoreactor_context.h"
+#include "../monte_carlo_techs/src/contexts/lotkareactor_context.h"
+#include "../monte_carlo_techs/src/contexts/lotkathreereactor_context.h"
 
-#include "../../src/contexts/rejectionsimulation_context.h"
-#include "../../src/contexts/rejectionfreesimulation_context.h"
-#include "../../src/contexts/dynamicsimulation_context.h"
-#include "../../src/contexts/kineticsimulation_context.h"
-#include "../../src/contexts/treebasedsimulation_context.h"
+#include "../monte_carlo_techs/src/contexts/rejectionsimulation_context.h"
+#include "../monte_carlo_techs/src/contexts/rejectionfreesimulation_context.h"
+#include "../monte_carlo_techs/src/contexts/dynamicsimulation_context.h"
+#include "../monte_carlo_techs/src/contexts/kineticsimulation_context.h"
+#include "../monte_carlo_techs/src/contexts/treebasedsimulation_context.h"
 
 MainWindowContext::MainWindowContext() : _area(50, 50), _cellSideLength(5), _totalTime(0) {
     setWindowTitle("Monte Carlo simulation");

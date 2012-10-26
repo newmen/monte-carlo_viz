@@ -8,8 +8,8 @@
 #include "playbutton.h"
 #include "renderarea_context.h"
 
-#include "../../src/contexts/basereactor_context.h"
-#include "../../src/contexts/basesimulation_context.h"
+#include "../monte_carlo_techs/src/contexts/basereactor_context.h"
+#include "../monte_carlo_techs/src/contexts/basesimulation_context.h"
 
 class MainWindowContext : public QWidget
 {
