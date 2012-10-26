@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-#include "../../src/datas/area_data.h"
+#include "../monte_carlo_techs/src/datas/area_data.h"
 
 class RenderAreaContext : public QWidget
 {
