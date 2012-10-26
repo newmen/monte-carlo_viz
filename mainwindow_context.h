@@ -9,8 +9,8 @@
 #include "playbutton.h"
 #include "renderarea_context.h"
 
-#include "../../src/contexts/readevent_context.h"
-#include "../../src/datas/area_data.h"
+#include "../monte_carlo_techs/src/contexts/readevent_context.h"
+#include "../monte_carlo_techs/src/datas/area_data.h"
 
 class MainWindowContext : public QWidget
 {
