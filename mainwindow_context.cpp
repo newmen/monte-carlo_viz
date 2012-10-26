@@ -22,10 +22,6 @@ MainWindowContext::MainWindowContext() : _area(50, 50), _cellSideLength(5), _tot
 //    _reactor = new LotkaReactorContext;
 //    _reactor = new LotkaThreeReactorContext;
 
-//    _simulationContext = new RejectionSimulationContext(&_area, _reactor);
-//    _simulationContext = new RejectionFreeSimulationContext(&_area, _reactor);
-//    _simulationContext = new DynamicSimulationContext(&_area, _reactor);
-//    _simulationContext = new KineticSimulationContext(&_area, _reactor);
     _simulationContext = new TreeBasedSimulationContext(&_area, _reactor);
     _renderArea = new RenderAreaContext(&_area, _cellSideLength, false);
 
